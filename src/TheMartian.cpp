@@ -1,4 +1,4 @@
-#include "TerrariumTemplate.h"
+#include "TheMartian.h"
 
 /**
  * Audio callback to process each enabled effect
@@ -30,7 +30,7 @@ void InitializeControls()
     System::Delay(500);
 
     // Initialize the effect knobs
-    boost.ConfigureKnobPositions(KNOB_1_CHN);
+    boost.ConfigureKnobPositions(KNOB_6_CHN);
 
     // Initialize the effect toggles
     boost.ConfigureTogglePositions(effectTogglePin2);

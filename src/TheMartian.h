@@ -1,5 +1,5 @@
-#ifndef TERR_TEMPLATE_H
-#define TERR_TEMPLATE_H
+#ifndef THE_MARTIAN_H
+#define THE_MARTIAN_H
 
 #include "../include/PedalConfig.h"
 #include "../lib/DaisyInputs/Knob.h"

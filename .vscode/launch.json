@@ -6,7 +6,7 @@
             "request": "launch",
             "name": "Debug J-Link",
             "cwd": "${workspaceRoot}",
-            "executable": "./build/TerrariumTemplate.elf",
+            "executable": "./build/TheMartian.elf",
             "serverpath": "C:/Program Files (x86)/SEGGER/JLink/JLinkGDBServerCL.exe",
             "servertype": "jlink",
             "device": "STM32H750XB",

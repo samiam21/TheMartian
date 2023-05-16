@@ -7,8 +7,13 @@ void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, s
 {
     for (size_t i = 0; i < size; i++)
     {
-        // Process the effect audio
-        out[0][i] = boost.Process(in[0][i]);
+        float wet = in[0][i];
+
+        // Add the reverb effect
+        wet = reverb.Process(wet);
+
+        // Add the level boost and send out
+        out[0][i] = boost.Process(wet);
     }
 }
 
@@ -31,15 +36,20 @@ void InitializeControls()
 
     // Initialize the effect knobs
     boost.ConfigureKnobPositions(KNOB_6_CHN);
-
-    // Initialize the effect toggles
-    boost.ConfigureTogglePositions(effectTogglePin2);
+    reverb.ConfigureKnobPositions(KNOB_1_CHN, KNOB_2_CHN, KNOB_3_CHN);
 }
 
 void InitializeEffects()
 {
     // Initialize the boost effect
+    boost.SetBoostMinMax(BOOST_MIN, BOOST_MAX);
     boost.Setup(hw);
+
+    // Initialize the reverb effect
+    reverb.SetMinMaxDecay(DECAY_MIN, DECAY_MAX);
+    reverb.SetMinMaxMix(MIX_MIN, MIX_MAX);
+    reverb.ShouldReverseTonePot(true);
+    reverb.Setup(hw);
 }
 
 int main(void)
@@ -67,6 +77,7 @@ int main(void)
     while (1)
     {
         // Run the effect loop functions
+        reverb.Loop(true);
         boost.Loop(true);
     }
 }

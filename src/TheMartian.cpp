@@ -9,8 +9,11 @@ void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, s
     {
         float wet = in[0][i];
 
-        // Add the octave up pitch shift effect for the shimmer
-        wet = shifter.Process(wet);
+        if (shimmerOn)
+        {
+            // Add the octave up pitch shift effect for the shimmer
+            wet = shifter.Process(wet);
+        }
 
         // Add the reverb effect
         wet = reverb.Process(wet);
@@ -41,6 +44,9 @@ void InitializeControls()
     boost.ConfigureKnobPositions(KNOB_6_CHN);
     reverb.ConfigureKnobPositions(KNOB_1_CHN, KNOB_2_CHN, KNOB_3_CHN);
     shifter.ConfigureKnobPositions(KNOB_4_CHN, KNOB_NO_CHN, KNOB_NO_CHN, KNOB_NO_CHN);
+
+    // Initialize the toggles
+    shimmerToggle.Init(hw->GetPin(effectTogglePin2));
 }
 
 void InitializeEffects()
@@ -83,6 +89,9 @@ int main(void)
 
     while (1)
     {
+        // Check the shimmer toggle
+        shimmerOn = shimmerToggle.ReadToggle();
+
         // Run the effect loop functions
         shifter.Loop(true);
         reverb.Loop(true);

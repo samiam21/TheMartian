@@ -2,7 +2,6 @@
 #define THE_MARTIAN_H
 
 #include "../include/PedalConfig.h"
-#include "../lib/DaisyInputs/Knob.h"
 #include "../lib/DaisyInputs/SimpleToggle.h"
 #include "../lib/DaisyEffects/CleanBoost.h"
 #include "../lib/DaisyEffects/Reverb.h"
@@ -14,6 +13,10 @@ using namespace daisy;
 
 // Declare a DaisySeed object called hw
 DaisySeed *hw;
+
+// Declare the toggle and parameter for enabling shimmer
+SimpleToggle shimmerToggle;
+bool shimmerOn;
 
 // Declare the effects objects being used
 CleanBoost boost;

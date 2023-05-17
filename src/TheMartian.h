@@ -28,8 +28,10 @@ const float BOOST_MIN = 5.f;
 const float BOOST_MAX = 0.5f;
 const float DECAY_MIN = 0.99f;
 const float DECAY_MAX = 0.79f;
-const float MIX_MIN = 1.f;
-const float MIX_MAX = 0.0f;
+const float VERB_MIX_MIN = 1.f;
+const float VERB_MIX_MAX = 0.0f;
+const float PITCH_MIX_MIN = 1.f;
+const float PITCH_MIX_MAX = 0.0f;
 
 /**
  * Audio callback to process each enabled effect

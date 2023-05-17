@@ -57,11 +57,12 @@ void InitializeEffects()
 
     // Initialize the reverb effect
     reverb.SetMinMaxDecay(DECAY_MIN, DECAY_MAX);
-    reverb.SetMinMaxMix(MIX_MIN, MIX_MAX);
+    reverb.SetMinMaxMix(VERB_MIX_MIN, VERB_MIX_MAX);
     reverb.ShouldReverseTonePot(true);
     reverb.Setup(hw);
 
     // Initialize the pitch shifter
+    shifter.SetMinMaxMix(PITCH_MIX_MIN, PITCH_MIX_MAX);
     shifter.Setup(hw);
 }
 

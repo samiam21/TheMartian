@@ -90,7 +90,7 @@ int main(void)
     while (1)
     {
         // Check the shimmer toggle
-        shimmerOn = shimmerToggle.ReadToggle();
+        shimmerOn = !shimmerToggle.ReadToggle();
 
         // Run the effect loop functions
         shifter.Loop(true);

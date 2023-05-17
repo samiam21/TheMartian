@@ -9,6 +9,9 @@ void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, s
     {
         float wet = in[0][i];
 
+        // Add the octave up pitch shift effect for the shimmer
+        wet = shifter.Process(wet);
+
         // Add the reverb effect
         wet = reverb.Process(wet);
 
@@ -37,6 +40,7 @@ void InitializeControls()
     // Initialize the effect knobs
     boost.ConfigureKnobPositions(KNOB_6_CHN);
     reverb.ConfigureKnobPositions(KNOB_1_CHN, KNOB_2_CHN, KNOB_3_CHN);
+    shifter.ConfigureKnobPositions(KNOB_4_CHN, KNOB_NO_CHN, KNOB_NO_CHN, KNOB_NO_CHN);
 }
 
 void InitializeEffects()
@@ -50,6 +54,9 @@ void InitializeEffects()
     reverb.SetMinMaxMix(MIX_MIN, MIX_MAX);
     reverb.ShouldReverseTonePot(true);
     reverb.Setup(hw);
+
+    // Initialize the pitch shifter
+    shifter.Setup(hw);
 }
 
 int main(void)
@@ -77,6 +84,7 @@ int main(void)
     while (1)
     {
         // Run the effect loop functions
+        shifter.Loop(true);
         reverb.Loop(true);
         boost.Loop(true);
     }

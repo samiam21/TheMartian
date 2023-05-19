@@ -109,8 +109,9 @@ int main(void)
 
     while (1)
     {
-        // Check the shimmer toggle
+        // Check the shimmer toggle and adjust the tail
         shimmerOn = !shimmerToggle.ReadToggle();
+        reverb.LengthenTail(shimmerOn);
 
         // Run the effect loop functions
         shifter.Loop(true);

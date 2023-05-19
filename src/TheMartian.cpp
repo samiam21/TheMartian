@@ -11,6 +11,9 @@ void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, s
 
         if (shimmerOn)
         {
+            // Compress the signal prior to shifting the pitch for a smoother sound
+            wet = compressor.Process(wet);
+
             // Add the octave up pitch shift effect for the shimmer
             wet = shifter.Process(wet);
         }
@@ -44,6 +47,7 @@ void InitializeControls()
     boost.ConfigureKnobPositions(KNOB_6_CHN);
     reverb.ConfigureKnobPositions(KNOB_1_CHN, KNOB_2_CHN, KNOB_3_CHN);
     shifter.ConfigureKnobPositions(KNOB_4_CHN, KNOB_NO_CHN, KNOB_NO_CHN, KNOB_NO_CHN);
+    compressor.ConfigureKnobPositions(KNOB_NO_CHN, KNOB_NO_CHN, KNOB_NO_CHN, KNOB_NO_CHN);
 
     // Initialize the toggles
     shimmerToggle.Init(hw->GetPin(effectTogglePin2));
@@ -64,6 +68,9 @@ void InitializeEffects()
     // Initialize the pitch shifter
     shifter.SetMinMaxMix(PITCH_MIX_MIN, PITCH_MIX_MAX);
     shifter.Setup(hw);
+
+    // Initialize the compressor
+    compressor.Setup(hw);
 }
 
 int main(void)

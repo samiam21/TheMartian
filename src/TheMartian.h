@@ -6,6 +6,7 @@
 #include "../lib/DaisyEffects/CleanBoost.h"
 #include "../lib/DaisyEffects/Reverb.h"
 #include "../lib/DaisyEffects/Shifter.h"
+#include "../lib/DaisyEffects/DaisyCompressor.h"
 
 // Use the daisy namespace to prevent having to type
 // daisy:: before all libdaisy functions
@@ -22,6 +23,7 @@ bool shimmerOn;
 CleanBoost boost;
 Reverb reverb;
 Shifter shifter;
+DaisyCompressor compressor;
 
 // Declare effect min and maxes (reversed because pots are backwards)
 const float BOOST_MIN = 5.f;

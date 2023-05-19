@@ -16,6 +16,9 @@ void AudioCallback(AudioHandle::InputBuffer in, AudioHandle::OutputBuffer out, s
 
             // Add the octave up pitch shift effect for the shimmer
             wet = shifter.Process(wet);
+
+            // Add a small chorus effect to the pitch shift for a "strings-esque" sound
+            wet = chorus.Process(wet);
         }
 
         // Add the reverb effect
@@ -48,6 +51,12 @@ void InitializeControls()
     reverb.ConfigureKnobPositions(KNOB_1_CHN, KNOB_2_CHN, KNOB_3_CHN);
     shifter.ConfigureKnobPositions(KNOB_4_CHN, KNOB_NO_CHN, KNOB_NO_CHN, KNOB_NO_CHN);
     compressor.ConfigureKnobPositions(KNOB_NO_CHN, KNOB_NO_CHN, KNOB_NO_CHN, KNOB_NO_CHN);
+    chorus.ConfigureKnobPositions(KNOB_NO_CHN, KNOB_NO_CHN, KNOB_NO_CHN, KNOB_NO_CHN);
+
+    // reverb.ConfigureKnobPositions(KNOB_NO_CHN, KNOB_NO_CHN, KNOB_NO_CHN);
+    // shifter.ConfigureKnobPositions(KNOB_NO_CHN, KNOB_NO_CHN, KNOB_NO_CHN, KNOB_NO_CHN);
+    // compressor.ConfigureKnobPositions(KNOB_NO_CHN, KNOB_NO_CHN, KNOB_NO_CHN, KNOB_NO_CHN);
+    // chorus.ConfigureKnobPositions(KNOB_1_CHN, KNOB_2_CHN, KNOB_3_CHN, KNOB_4_CHN);
 
     // Initialize the toggles
     shimmerToggle.Init(hw->GetPin(effectTogglePin2));
@@ -71,6 +80,9 @@ void InitializeEffects()
 
     // Initialize the compressor
     compressor.Setup(hw);
+
+    // Initialize the chorus
+    chorus.Setup(hw);
 }
 
 int main(void)
@@ -104,5 +116,7 @@ int main(void)
         shifter.Loop(true);
         reverb.Loop(true);
         boost.Loop(true);
+        compressor.Loop(true);
+        chorus.Loop(true);
     }
 }
